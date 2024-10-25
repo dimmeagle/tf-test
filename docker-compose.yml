@@ -1,0 +1,23 @@
+services:
+  tf-test:
+    image: tf-test
+    container_name: tf-test
+    build:
+      context: .
+      dockerfile: test.dockerfile
+    restart: always
+    tty: true
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    volumes:
+      - ./src:/opt/tf
+    networks:
+      - tf-network
+networks:
+  tf-network:
+    driver: bridge
