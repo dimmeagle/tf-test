@@ -2,6 +2,7 @@ services:
   tf-test:
     image: tf-test
     container_name: tf-test
+    runtime: nvidia
     build:
       context: .
       dockerfile: test.dockerfile
